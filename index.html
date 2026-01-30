@@ -83,7 +83,7 @@
             <a href="#" id="appLink" class="btn btn-primary">Open in App</a>
             <br>
             <a href="https://apps.apple.com/app/YOUR_APP_ID" class="btn">Download for iOS</a>
-            <a href="https://play.google.com/store/apps/details?id=com.yourcompany.jdxr" class="btn">Download for Android</a>
+            <a href="https://play.google.com/store/apps/details?id=com.mycompany.jdxr" class="btn">Download for Android</a>
         </div>
     </div>
 
@@ -99,9 +99,11 @@
             userId = pathParts[profileIndex + 1];
         }
         
+        console.log('Path:', path);
         console.log('User ID:', userId);
         
         // Build deep link using your app scheme
+        // This will open: jdxr://jdxr.com/profile/USER_ID
         const deepLink = userId ? `jdxr://jdxr.com/profile/${userId}` : `jdxr://jdxr.com`;
         
         console.log('Deep Link:', deepLink);
@@ -124,14 +126,15 @@
             if (!appOpened) {
                 const userAgent = navigator.userAgent || navigator.vendor || window.opera;
                 if (/android/i.test(userAgent)) {
-                    // Redirect to Play Store
-                    // window.location.href = "https://play.google.com/store/apps/details?id=com.yourcompany.jdxr";
+                    // Uncomment when you have Play Store link
+                    // window.location.href = "https://play.google.com/store/apps/details?id=com.mycompany.jdxr";
                 } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                    // Redirect to App Store
+                    // Uncomment when you have App Store link
                     // window.location.href = "https://apps.apple.com/app/YOUR_APP_ID";
                 }
             }
         }, 3000);
     </script>
 </body>
+</html>
 </html>
