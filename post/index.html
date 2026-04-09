@@ -57,32 +57,30 @@
     </div>
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const postId = params.get('postRef');
+       const params = new URLSearchParams(window.location.search);
+const postId = params.get('postRef');
 
-        let deepLink = 'jdxr://jdxr.com';
-        if (postId) {
-            deepLink = `jdxr://jdxr.com/postsDetailsView?postRef=Posts/${postId}`;
-           // deepLink = 'jdxr://jdxr.com/postsDetailsView?postRef=Posts/' + postId;
+let deepLink = 'jdxr://jdxr.com';
+if (postId) {
+    deepLink = 'jdxr://jdxr.com/postsDetailsView?postRef=' + postId;
+}
+
+document.getElementById('appLink').href = deepLink;
+setTimeout(() => { window.location.href = deepLink; }, 500);
+
+let appOpened = false;
+window.addEventListener('blur', () => { appOpened = true; });
+
+setTimeout(() => {
+    if (!appOpened) {
+        const ua = navigator.userAgent.toLowerCase();
+        if (ua.includes('android')) {
+            window.location.href = 'https://play.google.com/store/apps/details?id=com.mycompany.jdxr';
+        } else if (ua.includes('iphone') || ua.includes('ipad')) {
+            window.location.href = 'https://apps.apple.com/app/YOUR_APP_ID';
         }
-
-        document.getElementById('appLink').href = deepLink;
-
-        setTimeout(() => { window.location.href = deepLink; }, 500);
-
-        let appOpened = false;
-        window.addEventListener('blur', () => { appOpened = true; });
-
-        setTimeout(() => {
-            if (!appOpened) {
-                const ua = navigator.userAgent.toLowerCase();
-                if (ua.includes('android')) {
-                    // window.location.href = 'https://play.google.com/store/apps/details?id=com.mycompany.jdxr';
-                } else if (ua.includes('iphone') || ua.includes('ipad')) {
-                    // window.location.href = 'https://apps.apple.com/app/YOUR_APP_ID';
-                }
-            }
-        }, 3000);
+    }
+}, 3000);
     </script>
 </body>
 </html>
