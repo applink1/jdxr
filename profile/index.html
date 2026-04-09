@@ -57,31 +57,43 @@
     </div>
 
     <script>
+        // const params = new URLSearchParams(window.location.search);
+        // const userId = params.get('userRef');
+
+        // let deepLink = 'jdxr://jdxr.com';
+        // if (userId) {
+        //     deepLink = `jdxr://jdxr.com/userProfile?userRef=users/${userId}`;
+        // }
+
+        // document.getElementById('appLink').href = deepLink;
+
+        // setTimeout(() => { window.location.href = deepLink; }, 500);
+
+        // let appOpened = false;
+        // window.addEventListener('blur', () => { appOpened = true; });
+
+        // setTimeout(() => {
+        //     if (!appOpened) {
+        //         const ua = navigator.userAgent.toLowerCase();
+        //         if (ua.includes('android')) {
+        //             // window.location.href = 'https://play.google.com/store/apps/details?id=com.mycompany.jdxr';
+        //         } else if (ua.includes('iphone') || ua.includes('ipad')) {
+        //             // window.location.href = 'https://apps.apple.com/app/YOUR_APP_ID';
+        //         }
+        //     }
+        // }, 3000);
         const params = new URLSearchParams(window.location.search);
-        const userId = params.get('userRef');
+const postId = params.get('postRef'); // gets just "M1DstU3iMeGYfndKAEL5"
 
-        let deepLink = 'jdxr://jdxr.com';
-        if (userId) {
-            deepLink = `jdxr://jdxr.com/userProfile?userRef=users/${userId}`;
-        }
-
-        document.getElementById('appLink').href = deepLink;
-
-        setTimeout(() => { window.location.href = deepLink; }, 500);
-
-        let appOpened = false;
-        window.addEventListener('blur', () => { appOpened = true; });
-
-        setTimeout(() => {
-            if (!appOpened) {
-                const ua = navigator.userAgent.toLowerCase();
-                if (ua.includes('android')) {
-                    // window.location.href = 'https://play.google.com/store/apps/details?id=com.mycompany.jdxr';
-                } else if (ua.includes('iphone') || ua.includes('ipad')) {
-                    // window.location.href = 'https://apps.apple.com/app/YOUR_APP_ID';
-                }
-            }
-        }, 3000);
+let deepLink = 'jdxr://jdxr.com';
+if (postId) {
+    // Concatenate with + NOT template literal to avoid encoding
+    deepLink = 'jdxr://jdxr.com/postsDetailsView?postRef=Posts/' + postId;
+    
+    // Then manually set location without encoding
+    document.getElementById('appLink').href = deepLink;
+    window.location.replace(deepLink);  // replace instead of href
+}
     </script>
 </body>
 </html>
